@@ -92,6 +92,17 @@
                 readonly
               />
             </div>
+            <div class="stat">
+              <label class="form-label" id="inp-total-discount">
+                Total con descuento</label>
+              <input
+                class="form-control-plaintext"
+                id="inp-total-discount"
+                type="number"
+                value="0"
+                readonly
+              />
+            </div>
           </div>
         </section>
 
@@ -131,6 +142,10 @@
             <div class="col-md-6">
               <label class="form-label" for="inp-fee">Cuota mensual</label>
               <input class="form-control" id="inp-fee" type="number" min="0" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="inp-discount">Descuento(%)</label>
+              <input class="form-control" id="inp-discount" type="number" min="0"/>
             </div>
           </div>
           <button class="btn btn-primary mt-4" id="btn-add" type="button">

@@ -73,7 +73,14 @@ function createFeeEditor(member: Member): HTMLDivElement {
   button.className = "btn btn-outline-secondary";
   button.textContent = "Guardar cuota";
   button.addEventListener("click", () => {
-    // TODO: editar la cuota del socio con el valor de input
+    try{
+      input.classList.remove("is-invalid");
+      memberList.updateFee(member.documentId, Number(input.value));
+      updateList();
+      updateTotals();
+    } catch(error){
+      input.classList.add("is-invalid");
+    }
   });
   group.append(input, button);
   return group;
@@ -82,6 +89,9 @@ function createFeeEditor(member: Member): HTMLDivElement {
 function createCard(member: Member): HTMLDivElement {
   const column = document.createElement("div");
   column.className = "col";
+  const plan = document.createElement("span");
+  plan.className = "badge text-bg-danger ms-2";
+  plan.innerText = `${PLAN_LABELS[member.plan]}`;
   const card = document.createElement("div");
   card.className = "card h-100";
   const body = document.createElement("div");
@@ -89,9 +99,9 @@ function createCard(member: Member): HTMLDivElement {
   const title = document.createElement("h5");
   title.className = "card-title";
   title.textContent = member.name;
+  title.appendChild(plan);
   const lines = [
     `Documento: ${member.documentId}`,
-    `Plan: ${PLAN_LABELS[member.plan]}`,
     `Cuota mensual: $${member.monthlyFee}`,
   ];
   if (member.discount > 0) {
